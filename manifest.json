@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+  "name": "Cambridge Dictionary",
+  "version": "1.0",
+  "description": "Open cambridge dictionary web page using the text you've selected.",
+  "icons": {
+    "48": "icons/cd-icon.ico"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "browser_style": true,
+    "default_title": "Cambridge Dictionary",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "clipboardWrite",
+    "cookies",
+    "<all_urls>"
+  ]
+}
