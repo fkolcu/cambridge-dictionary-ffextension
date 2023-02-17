@@ -4,7 +4,7 @@ queryTab.then(onQueryTabSuccessful, onQueryTabFailed);
 function onQueryTabSuccessful(tabs) {
     const cookiePromise = browser.cookies.get({
         url: tabs[0].url,
-        name: 'cd_ext_st'
+        name: 'fk_cd_ext_st'
     });
     cookiePromise.then(function (_cookie) {
         if (_cookie) {
