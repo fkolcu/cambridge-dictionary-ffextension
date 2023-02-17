@@ -23,8 +23,8 @@ function openDictionary(word) {
     const url = 'https://dictionary.cambridge.org/dictionary/english/' + word;
 
     const iframe = document.createElement('iframe');
-    iframe.width = 580;
-    iframe.height = 530;
+    iframe.width = '580';
+    iframe.height = '530';
     iframe.src = url;
 
     document.getElementById('cd_content').appendChild(iframe);
