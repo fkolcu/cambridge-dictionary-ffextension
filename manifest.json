@@ -30,6 +30,12 @@
     "clipboardWrite",
     "cookies",
     "<all_urls>",
-    "contextMenus"
-  ]
+    "contextMenus",
+    "storage"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "679fec38-9c8b-4be5-9c39-3358d41428c6@fk-cd-ext"
+    }
+  }
 }
