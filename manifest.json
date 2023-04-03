@@ -7,7 +7,9 @@
     "48": "icons/cd-icon.ico"
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
   "content_scripts": [
     {
@@ -33,6 +35,16 @@
     "contextMenus",
     "storage"
   ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+D",
+        "linux": "Ctrl+Shift+D",
+        "mac" : "MacCtrl+Shift+D"
+      },
+      "description": "Open dictionary popup"
+    }
+  },
   "browser_specific_settings": {
     "gecko": {
       "id": "{e577f4f3-8b71-4948-98c0-278b0c7cd194}"
