@@ -38,8 +38,8 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+D",
-        "linux": "Ctrl+Shift+D",
+        "default": "Ctrl+Alt+D",
+        "linux": "Ctrl+Alt+D",
         "mac" : "MacCtrl+Shift+D"
       },
       "description": "Open dictionary popup"
