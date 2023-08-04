@@ -1,70 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Cambridge Dictionary Firefox Extension</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <style>
-        body {
-            border: 3px solid blue;
-            padding: 5px;
-        }
-
-        #cd_content {
-            width: 600px;
-            height: 520px;
-        }
-
-        iframe {
-            width: 596px !important;
-            height: 516px !important;
-        }
-
-        select {
-            border: none;
-            background-color: #e74c3c;
-            color: white;
-            width: 100%;
-            padding: 10px;
-            cursor: pointer;
-        }
-    </style>
-</head>
 <body>
-<div id="cd_content"></div>
-<div id="options">
-    <select id="dictionary-selector">
-        <option value="english">English</option>
-        <optgroup label="Bilingual Dictionaries">
-            <option value="english-dutch">English–Dutch</option>
-            <option value="english-french">English–French</option>
-            <option value="english-german">English–German</option>
-            <option value="english-indonesian">English–Indonesian</option>
-            <option value="english-italian">English–Italian</option>
-            <option value="english-japanese">English–Japanese</option>
-            <option value="english-norwegian">English–Norwegian</option>
-            <option value="english-polish">English–Polish</option>
-            <option value="english-portuguese">English–Portuguese</option>
-            <option value="english-spanish">English–Spanish</option>
-        </optgroup>
-        <optgroup label="Semi-bilingual Dictionaries">
-            <option value="english-arabic">English–Arabic</option>
-            <option value="english-catalan">English–Catalan</option>
-            <option value="english-chinese-simplified">English–Chinese (Simplified)</option>
-            <option value="english-chinese-traditional">English–Chinese (Traditional)</option>
-            <option value="english-czech">English–Czech</option>
-            <option value="english-danish">English–Danish</option>
-            <option value="english-hindi">English–Hindi</option>
-            <option value="english-korean">English–Korean</option>
-            <option value="english-malaysian">English–Malay</option>
-            <option value="english-russian">English–Russian</option>
-            <option value="english-thai">English–Thai</option>
-            <option value="english-turkish">English–Turkish</option>
-            <option value="english-ukrainian">English–Ukrainian</option>
-            <option value="english-vietnamese">English–Vietnamese</option>
-        </optgroup>
-    </select>
-</div>
+<div id="content"></div>
 <script type="text/javascript" src="/source/popup.js"></script>
 </body>
 </html>
