@@ -100,6 +100,6 @@ function onDictionaryChanged(event) {
             return
         }
 
-        window.location = 'https://dictionary.cambridge.org/dictionary/' + event.target.value + '/' + selectedWord + '?ref=cdext';
+        window.location = 'https://dictionary.cambridge.org/dictionary/' + event.target.value + '/' + selectedWord + '?q=' + selectedWord + '&ref=cdext';
     });
 }
