@@ -51,6 +51,6 @@ storageItem.then((res) => {
             selectedDictionary = "english"
         }
 
-        window.location = 'https://dictionary.cambridge.org/dictionary/' + selectedDictionary + '/' + selectedWord + '?q=' + selectedWord + '&ref=cdext';
+        window.location = 'https://dictionary.cambridge.org/dictionary/' + selectedDictionary + '/' + selectedWord + '?q=' + selectedWord + '#ref=cdext';
     });
 });

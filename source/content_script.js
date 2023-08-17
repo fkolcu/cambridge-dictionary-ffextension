@@ -1,5 +1,5 @@
 document.body.addEventListener('mouseup', function (e) {
-    if (location.search.includes('ref=cdext')) {
+    if (location.hash.includes('ref=cdext')) {
         return
     }
 
@@ -71,7 +71,7 @@ const template = `
 </div>
 `;
 
-if (location.search.includes('ref=cdext')) {
+if (location.hash.includes('ref=cdext')) {
     let storageItem = browser.storage.sync.get('selectedDictionaryKey');
     storageItem.then((res) => {
         let selectedDictionary = res.selectedDictionaryKey
@@ -100,6 +100,6 @@ function onDictionaryChanged(event) {
             return
         }
 
-        window.location = 'https://dictionary.cambridge.org/dictionary/' + event.target.value + '/' + selectedWord + '?q=' + selectedWord + '&ref=cdext';
+        window.location = 'https://dictionary.cambridge.org/dictionary/' + event.target.value + '/' + selectedWord + '?q=' + selectedWord + '#ref=cdext';
     });
 }
