@@ -17,15 +17,20 @@ const template = `
     width: 600px;
     height: 520px;
    }
-  .cdext_selector_container{
+  .additional-options{
     position: fixed;
     width: 100%;
     height: 51px;
-    border: 1px solid #f0f0f0;
     z-index: 9999;
     bottom: 0;
+    display:flex;
+    align-items: center;
   }
-  select#cdext_selector {
+  .additional-options .cdext_selector_container{
+    flex-grow: 1;
+  }
+ 
+  .additional-options .cdext_selector_container select#cdext_selector {
     border: none;
     background-color: #e74c3c;
     color: white;
@@ -34,9 +39,64 @@ const template = `
     padding: 10px;
     cursor: pointer;
   }
+  
+  .additional-options .font-size-selector button#button_change_font_size{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    fill:#ffffff;
+  }
+  
+  .tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+
+.tooltip .tooltiptext {
+visibility: hidden;
+  width: 200px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: ;
+  margin-left: -27px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 8%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
 </style>
 
-<div class="cdext_selector_container">
+<div class="additional-options">
+    <div class="font-size-selector">
+        <button id="button_change_font_size" class="tooltip">
+           <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m22 6-3-4-3 4h2v4h-2l3 4 3-4h-2V6zM9.307 4l-6 16h2.137l1.875-5h6.363l1.875 5h2.137l-6-16H9.307zm-1.239 9L10.5 6.515 12.932 13H8.068z"/></svg>
+           <span id="button_change_font_size_tooltiptext" class="tooltiptext"></span>
+        </button>
+    </div>
+    <div class="cdext_selector_container">
   <select id="cdext_selector">
     <option value="english">English</option>
     <optgroup label="Bilingual Dictionaries">
@@ -69,6 +129,7 @@ const template = `
     </optgroup>
   </select>
 </div>
+</div>
 `;
 
 if (location.hash.includes('ref=cdext')) {
@@ -85,6 +146,8 @@ if (location.hash.includes('ref=cdext')) {
 
         document.getElementById('cdext_selector').value = selectedDictionary;
         document.getElementById('cdext_selector').addEventListener('change', onDictionaryChanged)
+
+        document.getElementById('button_change_font_size').addEventListener('click', onFontSizeToggled)
     });
 }
 
@@ -102,4 +165,73 @@ function onDictionaryChanged(event) {
 
         window.location = 'https://dictionary.cambridge.org/dictionary/' + event.target.value + '/' + selectedWord + '?q=' + selectedWord + '#ref=cdext';
     });
+}
+
+const initialFontSize = 16;
+const maxFontSize = 26;
+const fontSizeStep = 2;
+
+// Read the latest font size
+readFontSize(function (res) {
+    let fontSize = res.fontSize
+    if (fontSize === undefined || fontSize === "") {
+        fontSize = initialFontSize
+    }
+
+    applyFontSize(fontSize)
+})
+
+function onFontSizeToggled(event) {
+    readFontSize(function (res) {
+        let fontSize = res.fontSize
+        if (fontSize === undefined || fontSize === "") {
+            fontSize = initialFontSize
+        }
+
+        fontSize += fontSizeStep;
+
+        if (fontSize > maxFontSize) {
+            fontSize = initialFontSize;
+        }
+
+        applyFontSize(fontSize)
+
+        browser.storage.sync.set({
+            fontSize: fontSize
+        });
+    })
+}
+
+function readFontSize(fontSizeHandler) {
+    let storageItem = browser.storage.sync.get('fontSize');
+    storageItem.then((res) => {
+        fontSizeHandler(res)
+    });
+}
+
+const contentElements = document.querySelectorAll("#page-content *")
+
+const originalFontSizes = []; // Store original font sizes
+contentElements.forEach(element => {
+    originalFontSizes.push(getComputedStyle(element).fontSize);
+});
+
+function applyFontSize(fontSize) {
+    document.getElementById('button_change_font_size_tooltiptext').innerText = 'Toggle font size : ' + getFontSizeIndex(fontSize)
+
+    contentElements.forEach((element, index) => {
+        if (fontSize === initialFontSize) {
+            element.style.fontSize = originalFontSizes[index] // this is like `24px`, no need to add `px` postfix
+        } else {
+            element.style.fontSize = `${fontSize}px`
+        }
+    })
+}
+
+function getFontSizeIndex(selectedSize) {
+    if (selectedSize < initialFontSize || selectedSize > maxFontSize) {
+        return -1; // Size is out of range
+    }
+
+    return Math.floor((selectedSize - initialFontSize) / fontSizeStep);
 }
