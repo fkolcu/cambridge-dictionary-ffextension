@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Cambridge Dictionary",
-  "version": "3.3",
+  "version": "3.4",
   "description": "Open cambridge dictionary web page using the text you've selected.",
   "icons": {
     "48": "source/assets/icons/cd-icon.ico"
