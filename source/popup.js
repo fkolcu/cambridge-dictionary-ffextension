@@ -10,27 +10,83 @@ html,body{
     align-items: center;
     height: 100vh;
     margin: 0;
+     font-family: Arial, sans-serif;
+      background-color: #f7f9fc;
   }
 
   .container {
-    width: 600px;
-    height: 520px;
-    background-color: #f0f0f0;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 3px solid red;
-    padding: 5px;
+    flex-direction: column;
   }
 
   .centered-text {
     text-align: center;
     font-size: 24px;
   }
+  
+  h2 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 20px;
+      transition: border-color 0.3s ease;
+      text-align: center;
+    }
+    
+     input[type="text"]:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    button {
+    text-align: center;
+     background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    button:hover {
+       background-color: #0056b3;
+      transform: translateY(-2px);
+    }
+    
+     button:active {
+      transform: translateY(0);
+    }
+
+    .secondary-text {
+      font-size: 14px;
+      color: #666;
+      margin-top: 15px;
+    }
 </style>
 
 <div class="container">
-  <p class="centered-text">No word selected</p>
+    <h2>Look up a word manually:</h2>
+    <input type="text" id="lookUpText" placeholder="Enter a word">
+    <button id="lookUpButton">Look up</button>
+    <p class="secondary-text">Or choose a word on a website</p>
 </div>
 `;
 
@@ -41,6 +97,22 @@ storageItem.then((res) => {
         const templateContainer = document.createElement('div');
         templateContainer.innerHTML = template;
         document.getElementById('content').appendChild(templateContainer);
+        document.querySelector('#lookUpButton').addEventListener('click', function (e){
+            const lookUpText = (document.querySelector('#lookUpText').value ?? '').trim();
+            if (lookUpText === ""){
+                return;
+            }
+
+            storageItem = browser.storage.sync.get('selectedDictionaryKey');
+            storageItem.then((res) => {
+                let selectedDictionary = res.selectedDictionaryKey
+                if (selectedDictionary === undefined) {
+                    selectedDictionary = "english"
+                }
+
+                window.location = 'https://dictionary.cambridge.org/dictionary/' + selectedDictionary + '/' + lookUpText + '?q=' + lookUpText + '#ref=cdext';
+            });
+        });
         return
     }
 
