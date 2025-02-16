@@ -29,19 +29,26 @@ const template = `
   .additional-options .cdext_selector_container{
     flex-grow: 1;
   }
+  
+  .additional-options .cdext_selector_container, .additional-options .cdext_selector_container *{
+    background-color: #e74c3c;
+  }
  
   .additional-options .cdext_selector_container select#cdext_selector {
     border: none;
-    background-color: #e74c3c;
     color: white;
     width: 100%;
     height: 50px;
     padding: 10px;
     cursor: pointer;
+    box-shadow: none;
+    border-radius: 0;
   }
   
-  .additional-options .font-size-selector button#button_change_font_size{
+  .additional-options .font-size-selector, .additional-options .font-size-selector *{
     background-color: #007bff;
+  }
+  .additional-options .font-size-selector button#button_change_font_size{
     color: white;
     border: none;
     padding: 10px 20px;
@@ -56,7 +63,7 @@ const template = `
 }
 
 .tooltip .tooltiptext {
-visibility: hidden;
+  visibility: hidden;
   width: 200px;
   background-color: #555;
   color: #fff;
@@ -83,21 +90,43 @@ visibility: hidden;
   border-color: #555 transparent transparent transparent;
 }
 
+.tooltip .tooltiptext.text-right{
+    right:0;
+}
+
+.tooltip .tooltiptext.text-right::after{
+    right:8%;
+}
+
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
+
+.tab-item{
+    height:65px;
+    display: flex;
+    align-items: center;
+}
+
+.additional-options .rate-addon-link-container, .additional-options .rate-addon-link-container *{
+    background: #000;
+}
+.additional-options .rate-addon-link-container #button_rate_addon{
+    padding:10px 20px;
+    color:white;
+}
 </style>
 
 <div class="additional-options">
-    <div class="font-size-selector">
+    <div class="tab-item font-size-selector">
         <button id="button_change_font_size" class="tooltip">
            <svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m22 6-3-4-3 4h2v4h-2l3 4 3-4h-2V6zM9.307 4l-6 16h2.137l1.875-5h6.363l1.875 5h2.137l-6-16H9.307zm-1.239 9L10.5 6.515 12.932 13H8.068z"/></svg>
            <span id="button_change_font_size_tooltiptext" class="tooltiptext"></span>
         </button>
     </div>
-    <div class="cdext_selector_container">
-  <select id="cdext_selector">
+    <div class="tab-item cdext_selector_container">
+        <select id="cdext_selector">
     <option value="english">English</option>
     <optgroup label="Bilingual Dictionaries">
       <option value="english-dutch">English–Dutch</option>
@@ -128,7 +157,13 @@ visibility: hidden;
       <option value="english-vietnamese">English–Vietnamese</option>
     </optgroup>
   </select>
-</div>
+    </div>
+    <div class="tab-item rate-addon-link-container">
+        <a id="button_rate_addon" class="tooltip" href="https://addons.mozilla.org/en-US/firefox/addon/cambridge-dictionary-english/reviews/">
+            <svg width="24px" height="24px" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M9.95242 9.62272L11.5109 6.31816C11.711 5.89395 12.289 5.89395 12.4891 6.31816L14.0476 9.62272L17.5329 10.1559C17.9801 10.2243 18.1583 10.7996 17.8346 11.1296L15.313 13.7001L15.9081 17.3314C15.9845 17.7978 15.5168 18.1534 15.1167 17.9331L12 16.2177L8.88328 17.9331C8.48316 18.1534 8.01545 17.7978 8.09187 17.3314L8.68695 13.7001L6.16545 11.1296C5.8417 10.7996 6.01993 10.2243 6.46711 10.1559L9.95242 9.62272Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M22 12L23 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 2V1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 23V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20 20L19 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M20 4L19 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4 20L5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4 4L5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M1 12L2 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            <span class="tooltiptext text-right">Rate Cambridge Dictionary</span>
+        </a>
+    </div>
 </div>
 `;
 
