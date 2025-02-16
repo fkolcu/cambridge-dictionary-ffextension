@@ -1,9 +1,9 @@
 const template = `
 <style>
-html,body{
-    width: 600px;
-    height: 520px;
-}
+    html,body{
+        width: 600px;
+        height: 520px;
+    }
   body {
     display: flex;
     justify-content: center;
@@ -90,6 +90,76 @@ html,body{
 </div>
 `;
 
+const loadingTemplate = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <style>
+        html,body{
+         width: 600px;
+         height: 520px;
+        }
+        
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fff;
+            color: #000;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Centered Container */
+        .loading-container {
+            text-align: center;
+        }
+        
+        /* Spinner */
+        .spinner {
+            width: 64px;
+            height: 64px;
+            border: 6px solid #3b82f6;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        /* Loading Text */
+        .loading-text {
+            margin-top: 16px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* Spinner Animation */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <!-- Spinner -->
+        <div class="spinner"></div>
+
+        <!-- Loading Text -->
+        <p class="loading-text">Please wait, loading...</p>
+    </div>
+</body>
+</html>
+`;
+
 let storageItem = browser.storage.sync.get('selectedWord');
 storageItem.then((res) => {
     let selectedWord = res.selectedWord
@@ -115,6 +185,10 @@ storageItem.then((res) => {
         });
         return
     }
+
+    const templateContainer = document.createElement('div');
+    templateContainer.innerHTML = loadingTemplate;
+    document.getElementById('content').appendChild(templateContainer);
 
     storageItem = browser.storage.sync.get('selectedDictionaryKey');
     storageItem.then((res) => {
