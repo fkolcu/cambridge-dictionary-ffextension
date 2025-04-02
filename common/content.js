@@ -27,6 +27,33 @@ if (location.hash.includes('ref=cdext')) {
                     document.querySelector("#cdext_selector").addEventListener("change", onDictionaryChanged);
                 });
         });
+
+    let autoCloseTimer = null;
+
+    // Start the auto-close timer
+    const startAutoCloseTimer = () => {
+        // Close after 2 minutes (120000 ms)
+        autoCloseTimer = setTimeout(() => {
+            window.close();
+        }, 2 * 60 * 1000);
+    }
+
+    // Stop the auto-close timer
+    const stopAutoCloseTimer = () => {
+        if (autoCloseTimer) {
+            clearTimeout(autoCloseTimer);
+            autoCloseTimer = null;
+        }
+    }
+
+    // Listen for window focus and blur
+    window.addEventListener('blur', () => {
+        startAutoCloseTimer();
+    });
+
+    window.addEventListener('focus', () => {
+        stopAutoCloseTimer();
+    });
 } else {
     document.body.addEventListener('mouseup', function (event) {
         chrome.runtime.sendMessage({action: "wordSelected", data: document.getSelection().toString()});
