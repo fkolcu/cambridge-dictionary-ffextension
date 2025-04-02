@@ -63,8 +63,16 @@ const handleWordSelection = async (word) => {
     const safeWord = stringService.safeString(word);
     if (safeWord === "") {
         await storageService.set("library", "selectedWord", "");
+
+        chrome.contextMenus.update("lookupCambridge", {
+            title: `Look up in Cambridge Dictionary`
+        });
     } else {
         await storageService.set("library", "selectedWord", safeWord);
+
+        chrome.contextMenus.update("lookupCambridge", {
+            title: `Look up “${word}” in Cambridge Dictionary`
+        });
     }
 };
 
@@ -89,19 +97,4 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     if (info.menuItemId === "lookupCambridge") {
         await handleNewWindowLookUp(info.selectionText ?? "");
     }
-});
-
-chrome.contextMenus.onShown.addListener((info, tab) => {
-    const word = info.selectionText?.trim();
-
-    const newTitle = word
-        ? `Look up "${word}" in Cambridge Dictionary`
-        : "Look up in Cambridge Dictionary";
-
-    chrome.contextMenus.update("lookupCambridge", {
-        title: newTitle
-    });
-
-    // Required in Chrome to indicate async update is complete
-    chrome.contextMenus.refresh();
 });
