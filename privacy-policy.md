@@ -4,7 +4,7 @@
 **Updated Date:** April 2, 2025  
 **Addon Name:** Cambridge Dictionary (Unofficial)
 
-This privacy policy describes how the Cambridge Dictionary Lookup browser addon ("the Addon") handles user data.
+This privacy policy describes how the Cambridge Dictionary browser addon ("the Addon") handles user data.
 
 ## 1. Information Collected
 
