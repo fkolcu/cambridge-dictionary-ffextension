@@ -3,6 +3,8 @@ import stringService from "./services/stringService.js";
 import dictionaryService from "./services/dictionaryService.js";
 import browserService from "./services/browserService.js";
 
+let lastCommandRunTime = null;
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     switch (message.action) {
         case "wordSelected":
@@ -114,3 +116,34 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
         await handleNewWindowLookUp(info.selectionText ?? "");
     }
 });
+
+const isChrome = navigator.userAgent.includes("Chrome") && !navigator.userAgent.includes("Firefox");
+if (!isChrome) {
+    chrome.commands.onCommand.addListener(async (command) => {
+        if (command === "look_up_word") {
+            chrome.tabs.query({active: true, currentWindow: true}, async (tabs) => {
+                if (tabs.length > 0) {
+                    const activeTab = tabs[0];
+                    const url = activeTab.url;
+
+                    if (url.includes("#ref=cdext")) {
+                        return;
+                    }
+
+                    const now = Date.now();
+
+                    // Block if command was run in the last 5 seconds
+                    if (lastCommandRunTime && now - lastCommandRunTime < 5000) {
+                        return;
+                    }
+
+                    // Update timestamp
+                    lastCommandRunTime = now;
+
+                    const storage = await storageService.get("library");
+                    await handleNewWindowLookUp(storage.selectedWord ?? "");
+                }
+            });
+        }
+    });
+}

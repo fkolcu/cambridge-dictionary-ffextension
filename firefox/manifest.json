@@ -27,6 +27,16 @@
   "action": {
     "default_popup": "sources/popup.html"
   },
+  "commands": {
+    "look_up_word": {
+      "suggested_key": {
+        "default": "Ctrl+Alt+D",
+        "linux": "Ctrl+Alt+D",
+        "mac": "MacCtrl+Shift+D"
+      },
+      "description": "Look up selected word"
+    }
+  },
   "icons": {
     "48": "sources/icon/48.png",
     "64": "sources/icon/64.png",
