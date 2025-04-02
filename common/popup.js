@@ -33,13 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const button = document.getElementById('lookup-button');
 
-        const lookupWord = async() => {
+        const lookupWord = async () => {
             const safeWord = stringService.safeString(input.value);
             if (safeWord && safeWord.length > 0) {
                 hideElement(blankContainer);
                 showElement(loadingContainer);
                 await storageService.set("library", "selectedWord", safeWord);
-                dictionaryService.openDictionaryOnPopup(selectedDictionary, safeWord);
+                await dictionaryService.openDictionaryOnPopup(selectedDictionary, safeWord);
             } else {
                 alert("Please enter a word to look up.");
             }

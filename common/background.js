@@ -1,27 +1,39 @@
 import storageService from "./services/storageService.js";
 import stringService from "./services/stringService.js";
 import dictionaryService from "./services/dictionaryService.js";
+import browserService from "./services/browserService.js";
 
-chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     switch (message.action) {
         case "wordSelected":
-            await handleWordSelection(message.data);
-            break;
+            return Promise.resolve(handleWordSelection(message.data));
 
         case "readToolbar":
-            return {
-                result: await readToolbar()
-            }
+            readToolbar().then((result) => {
+                sendResponse({result});
+            });
+            return true;
 
         case "readStorage":
-            return {
-                result: await storageService.get("library")
-            }
+            storageService.get("library").then((result) => {
+                sendResponse({result});
+            });
+            return true;
 
         case "dictionaryChanged":
-            return {
-                result: await handleDictionaryChange(message.data)
-            };
+            handleDictionaryChange(message.data).then((result) => {
+                sendResponse({result});
+            });
+            return true;
+
+        case "lookUpInNewWindow":
+            handleNewWindowLookUp(message.data).then(() => {
+                sendResponse(true);
+            });
+            return true;
+
+        default:
+            return false;
     }
 });
 
@@ -30,6 +42,21 @@ const handleDictionaryChange = async (dictionary) => {
 
     const libraryStorage = await storageService.get("library");
     return dictionaryService.getDictionaryUrl(dictionary, libraryStorage.selectedWord);
+};
+
+const handleNewWindowLookUp = async (word) => {
+    await handleWordSelection(word);
+
+    const libraryStorage = await storageService.get("library");
+
+    let url = "";
+    if (libraryStorage.selectedWord === "") {
+        url = chrome.runtime.getURL("sources/popup.html");
+    } else {
+        url = dictionaryService.getDictionaryUrl(libraryStorage.selectedDictionary ?? "english", libraryStorage.selectedWord);
+    }
+
+    await browserService.openNewWindow(url);
 };
 
 const handleWordSelection = async (word) => {
@@ -43,7 +70,9 @@ const handleWordSelection = async (word) => {
 
 const readToolbar = async () => {
     const url = chrome.runtime.getURL("sources/toolbar.html");
+    const result = await fetch(url).then(res => res.text())
+
     return {
-        html: await fetch(url).then(res => res.text())
+        html: result
     };
 }
