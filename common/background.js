@@ -32,6 +32,18 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             });
             return true;
 
+        case "requestSettings":
+            storageService.get("settings").then((result) => {
+                sendResponse({result});
+            });
+            return true;
+
+        case "updateFontSize":
+            updateSettings(message.data).then(() => {
+                sendResponse(true);
+            })
+            return true;
+
         default:
             return false;
     }
@@ -84,6 +96,10 @@ const readToolbar = async () => {
         html: result
     };
 }
+
+const updateSettings = async (fontSize) => {
+    await storageService.set("settings", 'fontSize', fontSize);
+};
 
 chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
