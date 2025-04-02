@@ -2,6 +2,9 @@
 
 This addon helps you look up words without leaving the page you are on.
 
+## Privacy Policy
+[Privacy Policy](privacy-policy.md)
+
 ## Licence
 [MIT Licence](LICENSE)
 
