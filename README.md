@@ -1,13 +1,11 @@
-# Cambridge Dictionary Firefox Extension
+# Cambridge Dictionary Add-on
 
-This extension help you open cambridge dictionary web page after selecting a text on the same window you are on without
-leaving the page.
+This addon helps you look up words without leaving the page you are on.
 
 ## Licence
 [MIT Licence](LICENSE)
 
 ## Warning
 
-This extension is not an official extension. 
-This is not using any API of cambridge dictionary.
-It just provides an access to web page of cambridge dictionary through iframe.
+This add-on is not an official extension, and is not using any API of Cambridge Dictionary.
+It just provides access to the web page of Cambridge Dictionary through a window.

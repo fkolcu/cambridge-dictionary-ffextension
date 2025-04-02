@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cambridge Dictionary Tunnel</title>
+    <link rel="stylesheet" href="popup.css"/>
+</head>
+<body>
+<div id="cd-content">
+    <div id="blank-container" class="hidden">
+        <h1>Look up word manually</h1>
+        <div class="input-group">
+            <input type="text" placeholder="Enter word" id="manual-word" />
+            <button id="lookup-button">Look up</button>
+        </div>
+        <p class="hint">Or choose a word on a website</p>
+    </div>
+    <div id="loading-status" class="visible">
+        <div class="loading-container">
+            <!-- Spinner -->
+            <div class="spinner"></div>
+
+            <!-- Loading Text -->
+            <p class="loading-text">Please wait, loading...</p>
+        </div>
+    </div>
+
+</div>
+<script type="module" src="popup.js"></script>
+</body>
+</html>

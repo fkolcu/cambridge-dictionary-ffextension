@@ -1,3 +1,6 @@
 .idea
-built.sh
+
+build.sh
 versions/*
+chrome/sources/*
+firefox/sources/*
