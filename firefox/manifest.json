@@ -28,7 +28,9 @@
     "default_popup": "sources/popup.html"
   },
   "icons": {
-    "48": "sources/icon.ico"
+    "48": "sources/icon/48.png",
+    "64": "sources/icon/64.png",
+    "128": "sources/icon/128.png"
   },
   "browser_specific_settings": {
     "gecko": {
