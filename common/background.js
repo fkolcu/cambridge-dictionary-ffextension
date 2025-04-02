@@ -76,3 +76,32 @@ const readToolbar = async () => {
         html: result
     };
 }
+
+chrome.runtime.onInstalled.addListener(() => {
+    chrome.contextMenus.create({
+        id: "lookupCambridge",
+        title: "Look up in Cambridge Dictionary",
+        contexts: ["page", "selection"]
+    });
+});
+
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
+    if (info.menuItemId === "lookupCambridge") {
+        await handleNewWindowLookUp(info.selectionText ?? "");
+    }
+});
+
+chrome.contextMenus.onShown.addListener((info, tab) => {
+    const word = info.selectionText?.trim();
+
+    const newTitle = word
+        ? `Look up "${word}" in Cambridge Dictionary`
+        : "Look up in Cambridge Dictionary";
+
+    chrome.contextMenus.update("lookupCambridge", {
+        title: newTitle
+    });
+
+    // Required in Chrome to indicate async update is complete
+    chrome.contextMenus.refresh();
+});
