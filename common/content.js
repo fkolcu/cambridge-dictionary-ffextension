@@ -90,14 +90,4 @@ if (location.hash.includes('ref=cdext')) {
     document.body.addEventListener('mouseup', function (event) {
         chrome.runtime.sendMessage({action: "wordSelected", data: document.getSelection().toString()});
     });
-
-    document.addEventListener('keydown', function (e) {
-        if (
-            (e.ctrlKey && e.altKey && e.key === 'D') ||
-            (e.ctrlKey && e.shiftKey && e.key === 'D')
-        ) {
-            const selectedWord = window.getSelection().toString();
-            chrome.runtime.sendMessage({action: "lookUpInNewWindow", data: selectedWord});
-        }
-    });
 }
