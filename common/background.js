@@ -3,8 +3,6 @@ import stringService from "./services/stringService.js";
 import dictionaryService from "./services/dictionaryService.js";
 import browserService from "./services/browserService.js";
 
-let lastCommandRunTime = null;
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     switch (message.action) {
         case "wordSelected":
@@ -130,18 +128,15 @@ if (!isChrome) {
                         return;
                     }
 
-                    const now = Date.now();
+                    const tabId = activeTab.id;
 
-                    // Block if command was run in the last 5 seconds
-                    if (lastCommandRunTime && now - lastCommandRunTime < 5000) {
-                        return;
-                    }
-
-                    // Update timestamp
-                    lastCommandRunTime = now;
-
-                    const storage = await storageService.get("library");
-                    await handleNewWindowLookUp(storage.selectedWord ?? "");
+                    chrome.scripting.executeScript({
+                        target: {tabId},
+                        func: () => window.getSelection().toString()
+                    }, (results) => {
+                        const text = results?.[0]?.result?.trim();
+                        handleNewWindowLookUp(text ?? "");
+                    });
                 }
             });
         }

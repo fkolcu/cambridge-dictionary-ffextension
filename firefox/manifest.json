@@ -5,7 +5,8 @@
   "description": "Look up words on Cambridge Dictionary without leaving the page",
   "permissions": [
     "storage",
-    "contextMenus"
+    "contextMenus",
+    "scripting"
   ],
   "background": {
     "scripts": [
@@ -21,7 +22,7 @@
       "js": [
         "sources/content.js"
       ],
-      "run_at": "document_end"
+      "run_at": "document_idle"
     }
   ],
   "action": {

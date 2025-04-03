@@ -80,40 +80,12 @@ if (location.hash.includes('ref=cdext')) {
                         originalFontSizes.push(getComputedStyle(element).fontSize);
                     });
                     readFontSize((response) => {
-                        console.log("Font size settings", response)
                         const settings = response.result;
                         const fontSize = settings.fontSize ?? initialFontSize;
                         applyFontSize(fontSize);
                     });
                 });
         });
-
-    let autoCloseTimer = null;
-
-    // Start the auto-close timer
-    const startAutoCloseTimer = () => {
-        // Close after 2 minutes (120000 ms)
-        autoCloseTimer = setTimeout(() => {
-            window.close();
-        }, 2 * 60 * 1000);
-    }
-
-    // Stop the auto-close timer
-    const stopAutoCloseTimer = () => {
-        if (autoCloseTimer) {
-            clearTimeout(autoCloseTimer);
-            autoCloseTimer = null;
-        }
-    }
-
-    // Listen for window focus and blur
-    window.addEventListener('blur', () => {
-        startAutoCloseTimer();
-    });
-
-    window.addEventListener('focus', () => {
-        stopAutoCloseTimer();
-    });
 } else {
     document.body.addEventListener('mouseup', function (event) {
         chrome.runtime.sendMessage({action: "wordSelected", data: document.getSelection().toString()});
