@@ -3,9 +3,14 @@
   "name": "Cambridge Dictionary",
   "version": "3.5.2",
   "description": "Look up words on Cambridge Dictionary without leaving the page",
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "permissions": [
+    "tabs",
     "storage",
-    "contextMenus"
+    "contextMenus",
+    "scripting"
   ],
   "background": {
     "service_worker": "sources/background.js",
@@ -34,6 +39,16 @@
   ],
   "action": {
     "default_popup": "sources/popup.html"
+  },
+  "commands": {
+    "look_up_word": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+D",
+        "linux": "Ctrl+Shift+D",
+        "mac": "MacCtrl+Shift+D"
+      },
+      "description": "Look up selected word"
+    }
   },
   "icons": {
     "48": "sources/icon/48.png",
