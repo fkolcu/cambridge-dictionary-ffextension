@@ -115,30 +115,28 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
     }
 });
 
-const isChrome = navigator.userAgent.includes("Chrome") && !navigator.userAgent.includes("Firefox");
-if (!isChrome) {
-    chrome.commands.onCommand.addListener(async (command) => {
-        if (command === "look_up_word") {
-            chrome.tabs.query({active: true, currentWindow: true}, async (tabs) => {
-                if (tabs.length > 0) {
-                    const activeTab = tabs[0];
-                    const url = activeTab.url;
+chrome.commands.onCommand.addListener(async (command) => {
+    if (command === "look_up_word") {
+        chrome.tabs.query({active: true, currentWindow: true}, async (tabs) => {
+            if (tabs.length > 0) {
+                const activeTab = tabs[0];
+                const url = activeTab.url;
 
-                    if (url.includes("#ref=cdext")) {
-                        return;
-                    }
-
-                    const tabId = activeTab.id;
-
-                    chrome.scripting.executeScript({
-                        target: {tabId},
-                        func: () => window.getSelection().toString()
-                    }, (results) => {
-                        const text = results?.[0]?.result?.trim();
-                        handleNewWindowLookUp(text ?? "");
-                    });
+                if (url.includes("#ref=cdext")) {
+                    return;
                 }
-            });
-        }
-    });
-}
+
+                const tabId = activeTab.id;
+
+                chrome.scripting.executeScript({
+                    target: {tabId},
+                    func: () => window.getSelection().toString()
+                }, (results) => {
+                    const text = results?.[0]?.result?.trim();
+                    handleNewWindowLookUp(text ?? "");
+                });
+            }
+        });
+    }
+});
+
