@@ -4,7 +4,7 @@ This addon helps you look up words without leaving the page you are on.
 
 ## Marketplace
 - [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/cambridge-dictionary-english/)
-- Chrome Web Store (very soon)
+- [Chrome Web Store](https://chromewebstore.google.com/detail/cambridge-dictionary/pobhkelhalpmkbblgepmhbojnpgbcbpc)
 
 ## Privacy Policy
 [Privacy Policy](privacy-policy.md)
