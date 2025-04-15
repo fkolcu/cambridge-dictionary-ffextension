@@ -40,5 +40,5 @@ This privacy policy may be updated in the future. Any changes will be reflected 
 
 ---
 
-If you have questions or concerns about this privacy policy, please reach out through the official addon support page or repository.
+If you have questions or concerns about this privacy policy, please reach out through the addon support page or repository.
 
