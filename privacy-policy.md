@@ -1,7 +1,7 @@
 # Privacy Policy
 
 **Effective Date:** April 2, 2025  
-**Updated Date:** April 2, 2025  
+**Updated Date:** April 15, 2025  
 **Addon Name:** Cambridge Dictionary (Unofficial)
 
 This privacy policy describes how the Cambridge Dictionary browser addon ("the Addon") handles user data.
@@ -21,7 +21,7 @@ The Addon does **not** collect, transmit, or store any personal data or identifi
 The only external request made by the Addon is to [https://dictionary.cambridge.org/](https://dictionary.cambridge.org/), which is a third-party website operated by Cambridge University Press & Assessment.
 
 - We do **not** control Cambridge Dictionary's website or its data handling practices.
-- You are responsible for reviewing and agreeing to [Cambridge Dictionary’s Privacy Policy](https://dictionary.cambridge.org/help/privacy) when using their site.
+- You are responsible for reviewing and agreeing to [Cambridge Dictionary’s Privacy Policy](https://www.cambridge.org/legal/privacy) when using their site.
 
 ## 4. Data Sharing
 
