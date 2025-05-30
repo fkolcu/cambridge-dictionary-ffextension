@@ -72,6 +72,19 @@ if (location.hash.includes('ref=cdext')) {
 
             chrome.runtime.sendMessage({action: "readStorage", data: "library"})
                 .then((readStorageResponse) => {
+                    document.querySelector("#button_rate_addon").addEventListener('click', () => {
+                        console.log("User agent")
+                        const ua = navigator.userAgent.toLowerCase();
+                        console.log(ua)
+                        let url = "#";
+                        if (ua.includes("chrome")) { // Chrome
+                            url = "https://chromewebstore.google.com/detail/cambridge-dictionary/pobhkelhalpmkbblgepmhbojnpgbcbpc/reviews";
+                        } else { // Firefox
+                            url = "https://addons.mozilla.org/en-US/firefox/addon/cambridge-dictionary-english/reviews/";
+                        }
+                        window.open(url, '_blank');
+                    });
+
                     document.querySelector("#cdext_selector").value = readStorageResponse.result.selectedDictionary ?? "english";
                     document.querySelector("#cdext_selector").addEventListener("change", onDictionaryChanged);
                     document.querySelector('#button_change_font_size').addEventListener('click', onFontSizeToggled)
