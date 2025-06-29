@@ -52,5 +52,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 lookupWord();
             }
         });
+
+        // Add event listeners for ad buttons
+        const appStoreBtn = document.querySelector('.ad-btn.primary');
+        const playStoreBtn = document.querySelector('.ad-btn.secondary');
+        const websiteLink = document.querySelector('.ad-website');
+        
+        if (appStoreBtn) {
+            appStoreBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                window.open('https://apps.apple.com/us/app/english-with-scenarios/id6747390055', '_blank');
+            });
+        }
+        
+        if (playStoreBtn) {
+            playStoreBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                window.open('https://play.google.com/store/apps/details?id=com.furkank.englishwithscenario', '_blank');
+            });
+        }
+        
+        if (websiteLink) {
+            websiteLink.addEventListener('click', (event) => {
+                event.stopPropagation();
+                window.open('https://englishwithscenarios.furkankolcu.com/', '_blank');
+            });
+        }
     })
 });

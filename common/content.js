@@ -88,6 +88,27 @@ if (location.hash.includes('ref=cdext')) {
                     document.querySelector("#cdext_selector").value = readStorageResponse.result.selectedDictionary ?? "english";
                     document.querySelector("#cdext_selector").addEventListener("change", onDictionaryChanged);
                     document.querySelector('#button_change_font_size').addEventListener('click', onFontSizeToggled)
+                    
+                    // Add event listener for the toggle button
+                    const toggleButton = document.querySelector('.app-ad-toggle');
+                    const adBlock = document.getElementById('app-ad-block');
+                    
+                    // Read toggle state from localStorage (default is open)
+                    const isCollapsed = localStorage.getItem('cdext-ad-collapsed') === 'true';
+                    if (isCollapsed && adBlock) {
+                        adBlock.classList.add('collapsed');
+                    }
+                    
+                    if (toggleButton) {
+                        toggleButton.addEventListener('click', function() {
+                            if (adBlock) {
+                                adBlock.classList.toggle('collapsed');
+                                // Save the new state to localStorage
+                                const nowCollapsed = adBlock.classList.contains('collapsed');
+                                localStorage.setItem('cdext-ad-collapsed', nowCollapsed.toString());
+                            }
+                        });
+                    }
                     contentElements = document.querySelectorAll("#page-content *");
                     contentElements?.forEach(element => {
                         originalFontSizes.push(getComputedStyle(element).fontSize);

@@ -102,3 +102,87 @@ button:hover {
         transform: rotate(360deg);
     }
 }
+
+/* Advertisement Block */
+.app-ad {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 16px;
+    border-radius: 12px;
+    margin-top: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.ad-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.ad-icon {
+    font-size: 20px;
+}
+
+.ad-title {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.ad-description {
+    font-size: 13px;
+    margin: 8px 0 12px 0;
+    opacity: 0.9;
+    line-height: 1.4;
+}
+
+.ad-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.ad-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex: 1;
+}
+
+.ad-btn.primary {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.ad-btn.primary:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.ad-btn.secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.ad-btn.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.ad-website {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 11px;
+    text-align: center;
+    display: block;
+    margin-top: 4px;
+}
+
+.ad-website:hover {
+    color: white;
+    text-decoration: underline;
+}
