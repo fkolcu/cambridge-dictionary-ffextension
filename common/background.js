@@ -52,6 +52,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             sendResponse(true);
             return true;
 
+        case "clearSelectedWord":
+            storageService.set("library", "selectedWord", "");
+            sendResponse(true);
+            return true;
+
         default:
             return false;
     }

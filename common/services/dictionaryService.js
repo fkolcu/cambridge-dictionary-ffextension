@@ -9,12 +9,16 @@ const dictionaryService = {
             // Create window and notify background script about it
             const windowId = await browserService.openNewWindowAndGetId(dictionaryUrl);
             if (windowId) {
-                // Notify background script to track this window for auto-close
+                // Notify background script to track this window for auto-close and clear the word
                 // Send message BEFORE closing the popup to ensure it gets through
                 try {
                     await chrome.runtime.sendMessage({
                         action: "trackPopupWindow",
                         data: windowId
+                    });
+                    // Also tell background to clear the word from storage
+                    await chrome.runtime.sendMessage({
+                        action: "clearSelectedWord"
                     });
                 } catch (err) {
                     // Silently ignore if message fails
