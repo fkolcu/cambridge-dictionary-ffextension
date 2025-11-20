@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Cambridge Dictionary",
-  "version": "3.5.3.3",
+  "version": "3.5.3.4",
   "description": "Look up words on Cambridge Dictionary without leaving the page",
   "permissions": [
     "storage",
