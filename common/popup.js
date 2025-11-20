@@ -1,6 +1,7 @@
 import storageService from "./services/storageService.js";
 import stringService from "./services/stringService.js";
 import dictionaryService from "./services/dictionaryService.js";
+import browserService from "./services/browserService.js";
 
 const showElement = (element) => {
     element.classList.remove("hidden");

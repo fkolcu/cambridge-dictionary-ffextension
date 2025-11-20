@@ -3,6 +3,9 @@ import stringService from "./services/stringService.js";
 import dictionaryService from "./services/dictionaryService.js";
 import browserService from "./services/browserService.js";
 
+// Initialize focus listener to auto-close popup windows that lose focus
+browserService.initializeFocusListener();
+
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     switch (message.action) {
         case "wordSelected":
@@ -42,6 +45,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
             updateSettings(message.data).then(() => {
                 sendResponse(true);
             })
+            return true;
+
+        case "trackPopupWindow":
+            handleTrackPopupWindow(message.data);
+            sendResponse(true);
             return true;
 
         default:
@@ -99,6 +107,10 @@ const readToolbar = async () => {
 
 const updateSettings = async (fontSize) => {
     await storageService.set("settings", 'fontSize', fontSize);
+};
+
+const handleTrackPopupWindow = (windowId) => {
+    browserService.registerPopupWindow(windowId);
 };
 
 chrome.runtime.onInstalled.addListener(() => {
