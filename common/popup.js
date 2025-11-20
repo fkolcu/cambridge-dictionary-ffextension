@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (selectedWord && selectedWord.length > 0) {
             dictionaryService.openDictionaryOnPopup(selectedDictionary, selectedWord);
+            // Clear the word from storage immediately after opening
+            storageService.set("library", "selectedWord", "");
             return;
         }
 
@@ -39,8 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (safeWord && safeWord.length > 0) {
                 hideElement(blankContainer);
                 showElement(loadingContainer);
+                // Store word temporarily for the lookup
                 await storageService.set("library", "selectedWord", safeWord);
                 await dictionaryService.openDictionaryOnPopup(selectedDictionary, safeWord);
+                // Clear the word from storage immediately after opening
+                await storageService.set("library", "selectedWord", "");
             } else {
                 alert("Please enter a word to look up.");
             }
@@ -53,31 +58,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 lookupWord();
             }
         });
-
-        // Add event listeners for ad buttons
-        const appStoreBtn = document.querySelector('.ad-btn.primary');
-        const playStoreBtn = document.querySelector('.ad-btn.secondary');
-        const websiteLink = document.querySelector('.ad-website');
-        
-        if (appStoreBtn) {
-            appStoreBtn.addEventListener('click', (event) => {
-                event.stopPropagation();
-                window.open('https://apps.apple.com/us/app/english-with-scenarios/id6747390055', '_blank');
-            });
-        }
-        
-        if (playStoreBtn) {
-            playStoreBtn.addEventListener('click', (event) => {
-                event.stopPropagation();
-                window.open('https://play.google.com/store/apps/details?id=com.furkank.englishwithscenario', '_blank');
-            });
-        }
-        
-        if (websiteLink) {
-            websiteLink.addEventListener('click', (event) => {
-                event.stopPropagation();
-                window.open('https://englishwithscenarios.furkankolcu.com/', '_blank');
-            });
-        }
     })
 });

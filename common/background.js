@@ -77,6 +77,9 @@ const handleNewWindowLookUp = async (word) => {
     }
 
     await browserService.openNewWindow(url);
+
+    // Clear the word from storage immediately after opening the window
+    await storageService.set("library", "selectedWord", "");
 };
 
 const handleWordSelection = async (word) => {
